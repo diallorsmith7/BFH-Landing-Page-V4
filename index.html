@@ -695,7 +695,22 @@
 // DEVELOPER: Replace this with a live API call to your Airtable Providers table
 // GET /api/providers or fetch('https://api.airtable.com/v0/YOUR_BASE/Providers')
 // ─────────────────────────────────────────────
-const PROVIDERS = [
+// ── AIRTABLE CONFIG ──
+const AIRTABLE_TOKEN = 'patXYbyHauoK0jnXC.76e64897e12b5ac0b2d48ca26da29b0d9f0222e093829c6d5af20607de896c28';
+const AIRTABLE_BASE = 'appRBaiChjx9p0P25';
+const AIRTABLE_TABLE = 'Providers';
+
+async function fetchProvidersFromAirtable() {
+  const url = `https://api.airtable.com/v0/${AIRTABLE_BASE}/${AIRTABLE_TABLE}`;
+  const response = await fetch(url, {
+    headers: {
+      Authorization: `Bearer ${AIRTABLE_TOKEN}`
+    }
+  });
+  const data = await response.json();
+  return data.records;
+}
+ const PROVIDERS = [
   {
     id: 'rt',
     name: 'Dr. Ren\u00e9e Thompson',
