@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>For Providers — Black Family Health</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet"/>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-W5GJYPBXZZ"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-W5GJYPBXZZ');</script>
+<style>
+
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  :root{--cream:#FDF6EE;--brown-dark:#3B1F0E;--brown-mid:#7A4528;--brown-light:#C47D4F;--green-soft:#3A6B4A;--green-light:#D6EBD8;--accent:#E8632A;--text:#2B1608;--muted:#7A5C48;}
+  body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);line-height:1.6;}
+  .provider-bar{background:var(--brown-dark);padding:.5rem 2.5rem;display:flex;justify-content:flex-end;align-items:center;gap:1rem;}
+  .provider-bar p{font-size:.82rem;color:rgba(255,255,255,.65);}
+  .provider-bar p strong{color:rgba(255,255,255,.9);font-weight:500;}
+  .btn-provider-bar{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.4);padding:.35rem 1rem;border-radius:100px;font-family:'DM Sans',sans-serif;font-size:.8rem;font-weight:500;cursor:pointer;white-space:nowrap;text-decoration:none;}
+  nav{display:flex;justify-content:space-between;align-items:center;padding:1.25rem 2.5rem;border-bottom:1px solid rgba(122,69,40,.15);background:var(--cream);position:sticky;top:0;z-index:100;}
+  .logo{font-family:'Fraunces',serif;font-size:1.25rem;color:var(--brown-dark);text-decoration:none;display:inline-block;}
+  .logo span{color:var(--green-soft);}
+  .nav-right{display:flex;align-items:center;gap:.75rem;}
+  .nav-link{font-size:.85rem;color:var(--brown-mid);font-weight:500;background:none;border:none;cursor:pointer;padding:.5rem .75rem;border-radius:100px;text-decoration:none;}
+  .nav-divider{width:1px;height:20px;background:rgba(122,69,40,.2);}
+  .nav-cta{background:var(--accent);color:#fff;border:none;padding:.6rem 1.4rem;border-radius:100px;font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:500;cursor:pointer;text-decoration:none;display:inline-block;}
+  .section-tag{font-size:.8rem;font-weight:500;letter-spacing:.06em;color:var(--green-soft);text-transform:uppercase;margin-bottom:.75rem;}
+  h2{font-family:'Fraunces',serif;font-size:clamp(1.9rem,3vw,2.6rem);color:var(--brown-dark);line-height:1.2;letter-spacing:-.02em;margin-bottom:1rem;}
+  footer{background:#2B1608;padding:2rem 2.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+  footer p{font-size:.8rem;color:rgba(255,255,255,.4);}
+  footer a{color:rgba(255,255,255,.4);text-decoration:none;}
+
+  .prov-hero{background:var(--brown-dark);padding:5rem 2.5rem;}
+  .prov-hero-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;}
+  .prov-hero h1{font-family:'Fraunces',serif;font-size:clamp(2.2rem,4vw,3.2rem);color:#fff;line-height:1.15;margin-bottom:1rem;}
+  .prov-hero h1 em{color:var(--accent);font-style:italic;}
+  .prov-hero p{color:rgba(255,255,255,.75);font-size:1.05rem;line-height:1.7;margin-bottom:2rem;}
+  .hero-cta-row{display:flex;gap:1rem;flex-wrap:wrap;}
+  .btn-accent{background:var(--accent);color:#fff;border:none;padding:.9rem 2rem;border-radius:100px;font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:500;cursor:pointer;text-decoration:none;display:inline-block;}
+  .btn-white-ghost{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.4);padding:.9rem 2rem;border-radius:100px;font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:500;cursor:pointer;text-decoration:none;display:inline-block;}
+  .hero-stats{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+  .hero-stat-card{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:1.25rem;}
+  .hero-stat-num{font-family:'Fraunces',serif;font-size:2rem;color:#fff;line-height:1;margin-bottom:.25rem;}
+  .hero-stat-label{font-size:.8rem;color:rgba(255,255,255,.6);}
+  .benefits-section{padding:5rem 2.5rem;max-width:1100px;margin:0 auto;}
+  .benefits-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2.5rem;}
+  .benefit-card{background:#fff;border-radius:20px;padding:1.75rem;border:1px solid rgba(122,69,40,.1);}
+  .benefit-icon{width:48px;height:48px;border-radius:14px;background:var(--green-light);display:flex;align-items:center;justify-content:center;margin-bottom:1rem;font-size:1.4rem;}
+  .benefit-title{font-weight:500;font-size:1rem;color:var(--brown-dark);margin-bottom:.5rem;}
+  .benefit-desc{font-size:.88rem;color:var(--muted);line-height:1.65;}
+  .how-section{background:var(--brown-dark);padding:5rem 2.5rem;}
+  .how-inner{max-width:1100px;margin:0 auto;}
+  .how-section h2{color:#fff;}
+  .how-section .section-tag{color:var(--brown-light);}
+  .how-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem;margin-top:2.5rem;position:relative;}
+  .how-step{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:1.5rem;text-align:center;}
+  .how-step-num{font-family:'Fraunces',serif;font-size:2rem;color:var(--accent);margin-bottom:.75rem;}
+  .how-step-title{font-weight:500;font-size:.95rem;color:#fff;margin-bottom:.4rem;}
+  .how-step-desc{font-size:.82rem;color:rgba(255,255,255,.6);line-height:1.6;}
+  .testimonial-section{padding:5rem 2.5rem;max-width:1100px;margin:0 auto;}
+  .testi-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;margin-top:2.5rem;}
+  .testi-card{background:#fff;border-radius:20px;padding:1.75rem;border:1px solid rgba(122,69,40,.1);}
+  .stars{color:#F5C542;font-size:.9rem;margin-bottom:.75rem;letter-spacing:2px;}
+  .testi-quote{font-size:.92rem;color:var(--muted);line-height:1.7;margin-bottom:1.25rem;font-style:italic;}
+  .testi-name{font-weight:500;font-size:.88rem;color:var(--brown-dark);}
+  .testi-title{font-size:.78rem;color:var(--muted);}
+  .signup-section{background:var(--green-light);padding:5rem 2.5rem;}
+  .signup-inner{max-width:700px;margin:0 auto;}
+  .signup-section h2{text-align:center;}
+  .signup-section .section-tag{text-align:center;}
+  .signup-intro{text-align:center;color:var(--muted);font-size:1rem;margin-bottom:2.5rem;}
+  .signup-form{background:#fff;border-radius:24px;padding:2.5rem;border:1px solid rgba(122,69,40,.12);box-shadow:0 4px 32px rgba(59,31,14,.06);}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem;}
+  .form-group{display:flex;flex-direction:column;gap:.35rem;margin-bottom:1rem;}
+  .form-label{font-size:.82rem;font-weight:500;color:var(--brown-dark);}
+  .form-input{padding:.8rem 1.25rem;border:1.5px solid rgba(122,69,40,.2);border-radius:12px;font-family:'DM Sans',sans-serif;font-size:.95rem;color:var(--text);background:var(--cream);outline:none;width:100%;}
+  .form-input:focus{border-color:var(--brown-mid);}
+  .form-input::placeholder{color:var(--muted);}
+  .form-select{padding:.8rem 1.25rem;border:1.5px solid rgba(122,69,40,.2);border-radius:12px;font-family:'DM Sans',sans-serif;font-size:.95rem;color:var(--text);background:var(--cream);outline:none;width:100%;appearance:none;cursor:pointer;}
+  .form-textarea{padding:.8rem 1.25rem;border:1.5px solid rgba(122,69,40,.2);border-radius:12px;font-family:'DM Sans',sans-serif;font-size:.95rem;color:var(--text);background:var(--cream);outline:none;width:100%;resize:vertical;min-height:100px;}
+  .checkbox-row{display:flex;align-items:flex-start;gap:.75rem;margin-bottom:1rem;}
+  .checkbox-row input{margin-top:3px;flex-shrink:0;}
+  .checkbox-label{font-size:.85rem;color:var(--muted);line-height:1.5;}
+  .submit-btn{width:100%;background:var(--accent);color:#fff;border:none;padding:1rem;border-radius:100px;font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:500;cursor:pointer;margin-top:.5rem;}
+  .submit-btn:hover{background:#c94f1a;}
+  .form-success{display:none;text-align:center;padding:2rem;}
+  .form-success h3{font-family:'Fraunces',serif;font-size:1.5rem;color:var(--brown-dark);margin-bottom:.75rem;}
+  .form-success p{color:var(--muted);font-size:.95rem;line-height:1.7;}
+  .success-icon{width:64px;height:64px;background:var(--green-light);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;font-size:1.75rem;}
+  .faq-section{padding:5rem 2.5rem;max-width:800px;margin:0 auto;}
+  .faq-item{border-bottom:1px solid rgba(122,69,40,.1);padding:1.25rem 0;}
+  .faq-q{font-weight:500;color:var(--brown-dark);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:1rem;}
+  .faq-a{font-size:.9rem;color:var(--muted);line-height:1.7;margin-top:.75rem;display:none;}
+  .faq-a.open{display:block;}
+  .faq-arrow{font-size:.9rem;color:var(--muted);flex-shrink:0;transition:transform .2s;}
+  .faq-arrow.open{transform:rotate(180deg);}
+  @media(max-width:900px){.prov-hero-inner{grid-template-columns:1fr;}.benefits-grid{grid-template-columns:1fr 1fr;}.how-steps{grid-template-columns:1fr 1fr;}.testi-grid{grid-template-columns:1fr;}}
+  @media(max-width:600px){.benefits-grid{grid-template-columns:1fr;}.how-steps{grid-template-columns:1fr;}.form-row{grid-template-columns:1fr;}.hero-stats{grid-template-columns:1fr 1fr;}}
+</style>
+</head>
+<body>
+
+<div class="provider-bar">
+  <p><strong>Families are searching for providers like you.</strong> Join our network today.</p>
+  <a href="#signup" class="btn-provider-bar">Get Listed &rarr;</a>
+</div>
+<nav>
+  <a href="index.html" class="logo">Black Family <span>Health</span></a>
+  <div class="nav-right">
+    <a href="providers.html" class="nav-link">Browse Providers</a>
+    <a href="for-providers.html" class="nav-link" style="color:var(--accent);font-weight:600;">For Providers</a>
+    <div class="nav-divider"></div>
+    <a href="index.html#matcher" class="nav-cta">Find Care Now</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<div class="prov-hero">
+  <div class="prov-hero-inner">
+    <div>
+      <div class="section-tag" style="color:var(--brown-light);">For Health Professionals</div>
+      <h1>Grow your practice.<br/><em>Serve your community.</em></h1>
+      <p>Join the platform built to connect Black families with culturally competent providers. We bring you patients who are actively searching for a provider like you &mdash; ready to book.</p>
+      <div class="hero-cta-row">
+        <a href="#signup" class="btn-accent">Get Listed Today &rarr;</a>
+        <a href="providers.html" class="btn-white-ghost">See our providers</a>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat-card">
+        <div class="hero-stat-num">400K</div>
+        <div class="hero-stat-label">Black families in the Detroit area actively seeking care</div>
+      </div>
+      <div class="hero-stat-card">
+        <div class="hero-stat-num">2&ndash;5</div>
+        <div class="hero-stat-label">New patient inquiries per month per provider</div>
+      </div>
+      <div class="hero-stat-card">
+        <div class="hero-stat-num">&lt;2 min</div>
+        <div class="hero-stat-label">Average time for a family to find and match with a provider</div>
+      </div>
+      <div class="hero-stat-card">
+        <div class="hero-stat-num">Free</div>
+        <div class="hero-stat-label">To get listed during our Detroit launch phase</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Benefits -->
+<div class="benefits-section">
+  <div class="section-tag">Why join</div>
+  <h2>Built for providers who care about representation</h2>
+  <div class="benefits-grid">
+    <div class="benefit-card">
+      <div class="benefit-icon">&#127919;</div>
+      <div class="benefit-title">Pre-qualified patient leads</div>
+      <div class="benefit-desc">Every family that reaches you has already told us what they need. You get warm leads — not cold calls.</div>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-icon">&#127775;</div>
+      <div class="benefit-title">Culturally aligned patients</div>
+      <div class="benefit-desc">Families on our platform are specifically seeking providers who understand their cultural background and lived experience.</div>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-icon">&#128197;</div>
+      <div class="benefit-title">Direct Calendly booking</div>
+      <div class="benefit-desc">Your Calendly link goes directly on your profile. Families book themselves — no phone tag, no admin burden.</div>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-icon">&#128241;</div>
+      <div class="benefit-title">Telehealth friendly</div>
+      <div class="benefit-desc">Offer telehealth? We highlight it. Families actively filter for virtual care options and we surface you first.</div>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-icon">&#11088;</div>
+      <div class="benefit-title">Build your reputation</div>
+      <div class="benefit-desc">Collect patient reviews that showcase your culturally competent approach and build trust with new families.</div>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-icon">&#127757;</div>
+      <div class="benefit-title">National expansion</div>
+      <div class="benefit-desc">We&rsquo;re launching in Atlanta, DC, Chicago, and Houston next. Get in early and grow with the platform.</div>
+    </div>
+  </div>
+</div>
+
+<!-- How it works -->
+<div class="how-section">
+  <div class="how-inner">
+    <div class="section-tag">How it works</div>
+    <h2>Simple to join. Easy to manage.</h2>
+    <div class="how-steps">
+      <div class="how-step">
+        <div class="how-step-num">01</div>
+        <div class="how-step-title">Submit your application</div>
+        <div class="how-step-desc">Fill out the form below. Takes about 5 minutes. We review within 48 hours.</div>
+      </div>
+      <div class="how-step">
+        <div class="how-step-num">02</div>
+        <div class="how-step-title">We verify your credentials</div>
+        <div class="how-step-desc">Our team confirms your license, specialty, and availability before publishing your profile.</div>
+      </div>
+      <div class="how-step">
+        <div class="how-step-num">03</div>
+        <div class="how-step-title">Your profile goes live</div>
+        <div class="how-step-desc">Families searching in your specialty and location will find and match with you instantly.</div>
+      </div>
+      <div class="how-step">
+        <div class="how-step-num">04</div>
+        <div class="how-step-title">Patients book directly</div>
+        <div class="how-step-desc">They click your Calendly link and schedule. You get a new patient, no admin required.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Testimonials -->
+<div class="testimonial-section">
+  <div class="section-tag">Provider voices</div>
+  <h2>What providers are saying</h2>
+  <div class="testi-grid">
+    <div class="testi-card">
+      <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <p class="testi-quote">&ldquo;In my first month on the platform, I had 4 new patient inquiries from families who specifically wanted a Black therapist. That would have taken me years to build on my own.&rdquo;</p>
+      <div class="testi-name">Dr. M. Williams</div>
+      <div class="testi-title">Licensed Therapist &middot; Southfield, MI</div>
+    </div>
+    <div class="testi-card">
+      <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <p class="testi-quote">&ldquo;The families who find me through Black Family Health are engaged, motivated, and culturally aligned. The quality of patient relationships has been remarkable.&rdquo;</p>
+      <div class="testi-name">Dr. R. Thompson</div>
+      <div class="testi-title">Family Medicine &middot; Detroit, MI</div>
+    </div>
+  </div>
+</div>
+
+<!-- Sign Up Form -->
+<div class="signup-section" id="signup">
+  <div class="signup-inner">
+    <div class="section-tag" style="text-align:center;">Get listed</div>
+    <h2 style="text-align:center;">Apply to join our network</h2>
+    <p class="signup-intro">Complete the form below and we&rsquo;ll review your application within 48 hours. Listing is free during our Detroit launch phase.</p>
+
+    <div class="signup-form" id="signupForm">
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">First name *</label>
+          <input class="form-input" type="text" placeholder="First name" id="provFirstName"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Last name *</label>
+          <input class="form-input" type="text" placeholder="Last name" id="provLastName"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Professional title / credentials *</label>
+        <input class="form-input" type="text" placeholder="e.g. MD, LCSW, NP, PhD" id="provCredentials"/>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Email address *</label>
+          <input class="form-input" type="email" placeholder="you@practice.com" id="provEmail"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Phone number</label>
+          <input class="form-input" type="tel" placeholder="+1 (555) 000-0000" id="provPhone"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Primary specialty *</label>
+        <select class="form-select" id="provSpecialty">
+          <option value="" disabled selected>Select your specialty</option>
+          <option>Family Medicine</option>
+          <option>Internal Medicine</option>
+          <option>Pediatrics</option>
+          <option>OB/GYN</option>
+          <option>Therapy / Mental Health</option>
+          <option>Psychiatry</option>
+          <option>Cardiology</option>
+          <option>Dermatology</option>
+          <option>Orthopedics</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Practice city *</label>
+          <input class="form-input" type="text" placeholder="e.g. Detroit, MI" id="provCity"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Calendly or booking URL</label>
+          <input class="form-input" type="url" placeholder="https://calendly.com/..." id="provCalendly"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Tell us about your approach to culturally competent care *</label>
+        <textarea class="form-textarea" placeholder="Share your background, approach, and why you want to serve Black families..." id="provBio"></textarea>
+      </div>
+      <div class="checkbox-row">
+        <input type="checkbox" id="provTelehealth"/>
+        <label class="checkbox-label" for="provTelehealth">I offer telehealth / virtual appointments</label>
+      </div>
+      <div class="checkbox-row">
+        <input type="checkbox" id="provAccepting"/>
+        <label class="checkbox-label" for="provAccepting">I am currently accepting new patients</label>
+      </div>
+      <div class="checkbox-row">
+        <input type="checkbox" id="provAgree"/>
+        <label class="checkbox-label" for="provAgree">I agree to Black Family Health&rsquo;s provider terms and understand my listing will be reviewed before going live *</label>
+      </div>
+      <button class="submit-btn" onclick="submitProviderForm()">Submit My Application &rarr;</button>
+    </div>
+
+    <div class="form-success" id="formSuccess">
+      <div class="success-icon">&#10003;</div>
+      <h3>Application received!</h3>
+      <p>Thank you for applying to join Black Family Health. Our team will review your application and be in touch within 48 hours at the email you provided.</p>
+      <p style="margin-top:1rem;font-size:.85rem;">Questions? Email us at <a href="mailto:hello@blkfamilyhealth.com" style="color:var(--accent);">hello@blkfamilyhealth.com</a></p>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ -->
+<div class="faq-section">
+  <div class="section-tag">Common questions</div>
+  <h2>FAQs for providers</h2>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">Is it really free to get listed? <span class="faq-arrow">&#9660;</span></div>
+    <div class="faq-a">Yes &mdash; listing is completely free during our Detroit launch phase. We plan to introduce a premium tier later with advanced analytics and priority placement, but your basic listing will always be free.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">Do I need to be a Black provider to join? <span class="faq-arrow">&#9660;</span></div>
+    <div class="faq-a">No. We welcome any provider who has demonstrated commitment to culturally competent care for Black families &mdash; whether through training, lived experience, or practice philosophy. We do verify this during our review process.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">How does booking work? <span class="faq-arrow">&#9660;</span></div>
+    <div class="faq-a">Families click your Calendly or booking link directly from your profile. There&rsquo;s no middleman &mdash; appointments go straight to your calendar. We recommend setting up a free 20-minute intro call as your first appointment type.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">How long does the review process take? <span class="faq-arrow">&#9660;</span></div>
+    <div class="faq-a">We typically review applications within 48 hours on business days. We verify your license, specialty, and location before publishing your profile.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">Can I update my profile after it goes live? <span class="faq-arrow">&#9660;</span></div>
+    <div class="faq-a">Yes. Email us at hello@blkfamilyhealth.com with any changes and we&rsquo;ll update your profile within 24 hours. A self-service provider dashboard is coming soon.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">What specialties do you accept? <span class="faq-arrow">&#9660;</span></div>
+    <div class="faq-a">We accept all healthcare specialties &mdash; from primary care and therapy to OB/GYN, pediatrics, cardiology, dermatology, and more. If you serve Black families, we want you in our network.</div>
+  </div>
+</div>
+
+<footer>
+  <a href="index.html" class="logo" style="color:#fff;">Black Family <span style="color:var(--brown-light);">Health</span></a>
+  <p>&copy; 2025 Black Family Health &middot; <a href="index.html#matcher">Find Care</a> &middot; <a href="providers.html">Providers</a></p>
+</footer>
+
+<script>
+function submitProviderForm() {
+  const firstName = document.getElementById('provFirstName').value.trim();
+  const lastName  = document.getElementById('provLastName').value.trim();
+  const email     = document.getElementById('provEmail').value.trim();
+  const specialty = document.getElementById('provSpecialty').value;
+  const city      = document.getElementById('provCity').value.trim();
+  const bio       = document.getElementById('provBio').value.trim();
+  const agreed    = document.getElementById('provAgree').checked;
+
+  if (!firstName || !lastName || !email || !specialty || !city || !bio || !agreed) {
+    alert('Please fill in all required fields and agree to the terms.');
+    return;
+  }
+
+  // DEVELOPER: Send this data to Airtable via Make.com webhook
+  // fetch('YOUR_MAKE_WEBHOOK_URL', {
+  //   method: 'POST',
+  //   headers: { 'Content-Type': 'application/json' },
+  //   body: JSON.stringify({
+  //     name: firstName + ' ' + lastName,
+  //     email, specialty, city, bio,
+  //     telehealth: document.getElementById('provTelehealth').checked,
+  //     accepting: document.getElementById('provAccepting').checked,
+  //     calendly: document.getElementById('provCalendly').value,
+  //     credentials: document.getElementById('provCredentials').value,
+  //     phone: document.getElementById('provPhone').value,
+  //     status: 'Pending'
+  //   })
+  // });
+
+  document.getElementById('signupForm').style.display = 'none';
+  document.getElementById('formSuccess').style.display = 'block';
+}
+
+function toggleFaq(el) {
+  const answer = el.nextElementSibling;
+  const arrow  = el.querySelector('.faq-arrow');
+  answer.classList.toggle('open');
+  arrow.classList.toggle('open');
+}
+</script>
+</body>
+</html>
