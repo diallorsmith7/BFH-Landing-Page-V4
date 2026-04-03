@@ -909,7 +909,23 @@ function submitMatcher() {
   // });
   // ─────────────────────────────────────────────────────────────
 
-  const topMatches = matchProviders(answers);
+ // Send lead to Make.com → Airtable + Mailchimp
+fetch('https://hook.us2.make.com/trvyl7vm615305ioh058fg4cq4sckbg8', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    name: name,
+    email: email,
+    phone: phone,
+    insurance: insurance,
+    careFor: answers.careFor,
+    careType: answers.careType,
+    meetPref: answers.meetPref,
+    status: 'New'
+  })
+}).catch(err => console.log('Webhook error:', err));
+
+const topMatches = matchProviders(answers);
   showResults(name, email, topMatches);
 }
 
