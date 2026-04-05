@@ -216,6 +216,12 @@
   .modal-detail{font-size:.88rem;color:var(--text);margin-bottom:.35rem;display:flex;align-items:center;gap:.5rem;}
   .modal-detail span{color:var(--muted);font-size:.82rem;}
   .modal-bio{font-size:.88rem;color:var(--muted);line-height:1.7;margin-bottom:1.25rem;}
+  /* ── Embedded Calendly ── */
+  .calendly-embed-container{width:100%;min-height:620px;margin-top:1rem;border-radius:12px;overflow:hidden;border:1px solid rgba(122,69,40,.12);}
+  .calendly-inline-widget{min-width:100%;height:620px;}
+  .calendly-loading{display:flex;align-items:center;justify-content:center;min-height:200px;color:var(--muted);font-size:.9rem;}
+  /* make modal wider to fit calendar */
+  .modal-box{max-width:720px!important;width:95vw!important;}
   .btn-calendly{
     display:block;width:100%;background:var(--accent);color:#fff;
     border:none;padding:.9rem;border-radius:100px;
@@ -590,11 +596,11 @@
     <hr class="modal-divider"/>
     <div class="modal-section-label">About</div>
     <div class="modal-bio" id="modalBio"></div>
-    <a id="modalBookLink" href="#" target="_blank" class="btn-calendly">Book a Consultation &rarr;</a>
-    <p class="calendly-note">
-      <!-- DEVELOPER NOTE: Replace href above with provider's Calendly or booking URL -->
-      You&rsquo;ll be taken to the provider&rsquo;s scheduling page.
-    </p>
+    <hr class="modal-divider"/>
+    <div class="modal-section-label">Schedule Your Appointment</div>
+    <div class="calendly-embed-container">
+      <div id="calendlyWidget" class="calendly-loading">Loading calendar&hellip;</div>
+    </div>
   </div>
 </div>
 
@@ -1017,7 +1023,18 @@ function openProfile(id) {
   document.getElementById('modalName').textContent    = p.name;
   document.getElementById('modalTitle').textContent   = p.title;
   document.getElementById('modalBio').textContent     = p.bio;
-  document.getElementById('modalBookLink').href       = p.calendlyUrl;
+  document.getElementById('modalBookLink') && (document.getElementById('modalBookLink').href = p.calendlyUrl);
+  // Embed Calendly inline
+  const widgetEl = document.getElementById('calendlyWidget');
+  widgetEl.innerHTML = '';
+  widgetEl.className = 'calendly-inline-widget';
+  widgetEl.setAttribute('data-url', p.calendlyUrl + '?hide_gdpr_banner=1&primary_color=c97d4e');
+  if (window.Calendly) {
+    Calendly.initInlineWidget({ url: p.calendlyUrl + '?hide_gdpr_banner=1&primary_color=c97d4e', parentElement: widgetEl });
+  } else {
+    // fallback if script not yet loaded
+    widgetEl.innerHTML = `<iframe src="${p.calendlyUrl}?hide_gdpr_banner=1&primary_color=c97d4e&embed_type=Inline" width="100%" height="620" frameborder="0" style="border-radius:12px;"></iframe>`;
+  }
   document.getElementById('modalLocation').innerHTML  = '&#128205; <span>' + p.location + '</span>';
   document.getElementById('modalAvailability').innerHTML = '&#10003; <span>Accepting new patients &middot; ' + (p.telehealth && p.inperson ? 'In-person &amp; telehealth' : p.telehealth ? 'Telehealth available' : 'In-person only') + '</span>';
   document.getElementById('modalInsurance').innerHTML = '&#128179; <span>Multiple insurance plans accepted</span>';
@@ -1032,5 +1049,7 @@ function closeModal(e) {
 }
 </script>
 
+<!-- Calendly widget script -->
+<script src="https://assets.calendly.com/assets/external/widget.js" async></script>
 </body>
 </html>
