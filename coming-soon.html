@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Black Family Health — Coming Soon</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  :root{
+    --cream:#FDF6EE;
+    --brown-dark:#3B1F0E;
+    --brown-mid:#7A4528;
+    --brown-light:#C47D4F;
+    --green-soft:#3A6B4A;
+    --green-light:#D6EBD8;
+    --accent:#E8632A;
+    --muted:#7A5C48;
+  }
+
+  html,body{height:100%;}
+  body{
+    font-family:'DM Sans',sans-serif;
+    background:var(--cream);
+    color:var(--brown-dark);
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    position:relative;
+    overflow-x:hidden;
+  }
+
+  /* Silhouette bubbles */
+  body::before{
+    content:'';
+    position:fixed;
+    top:-15%;left:-12%;
+    width:520px;height:520px;
+    background:radial-gradient(circle, rgba(196,125,79,.12) 0%, transparent 65%);
+    border-radius:50%;
+    pointer-events:none;
+    z-index:0;
+  }
+  body::after{
+    content:'';
+    position:fixed;
+    bottom:-18%;right:-10%;
+    width:480px;height:480px;
+    background:radial-gradient(circle, rgba(58,107,74,.09) 0%, transparent 65%);
+    border-radius:50%;
+    pointer-events:none;
+    z-index:0;
+  }
+
+  /* ── Nav ── */
+  nav{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:1.1rem 2.5rem;
+    background:var(--brown-dark);
+    position:relative;
+    z-index:2;
+  }
+  .logo{
+    font-family:'Fraunces',serif;
+    font-size:1.2rem;
+    color:var(--cream);
+    text-decoration:none;
+    letter-spacing:-.01em;
+  }
+  .logo span{color:var(--brown-light);}
+
+  /* ── Main ── */
+  main{
+    flex:1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:3rem 2rem;
+    position:relative;
+    z-index:1;
+  }
+
+  .content{
+    max-width:600px;
+    text-align:center;
+  }
+
+  .eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background:var(--green-light);
+    color:var(--green-soft);
+    font-size:.75rem;
+    font-weight:600;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    padding:.4rem 1rem;
+    border-radius:100px;
+    margin-bottom:2rem;
+    opacity:0;
+    animation:fadeUp .6s ease forwards .1s;
+  }
+  .eyebrow::before{content:'';width:6px;height:6px;background:var(--green-soft);border-radius:50%;flex-shrink:0;}
+
+  h1{
+    font-family:'Fraunces',serif;
+    font-size:clamp(2.2rem,5vw,3.2rem);
+    line-height:1.15;
+    letter-spacing:-.03em;
+    margin-bottom:1.25rem;
+    opacity:0;
+    animation:fadeUp .7s ease forwards .25s;
+  }
+  h1 em{color:var(--accent);font-style:italic;}
+
+  .sub{
+    font-size:1.05rem;
+    color:var(--muted);
+    line-height:1.75;
+    margin-bottom:2.5rem;
+    opacity:0;
+    animation:fadeUp .7s ease forwards .4s;
+  }
+
+  /* ── Notify form ── */
+  .notify-form{
+    display:flex;
+    gap:.6rem;
+    max-width:420px;
+    margin:0 auto 1.25rem;
+    opacity:0;
+    animation:fadeUp .7s ease forwards .55s;
+  }
+  .notify-input{
+    flex:1;
+    padding:.85rem 1.1rem;
+    border:1.5px solid rgba(122,69,40,.18);
+    border-radius:100px;
+    font-family:'DM Sans',sans-serif;
+    font-size:.92rem;
+    color:var(--brown-dark);
+    background:#fff;
+    outline:none;
+    transition:border-color .2s;
+  }
+  .notify-input::placeholder{color:rgba(122,69,40,.4);}
+  .notify-input:focus{border-color:var(--accent);}
+
+  .btn-notify{
+    background:var(--accent);
+    color:#fff;
+    border:none;
+    padding:.85rem 1.6rem;
+    border-radius:100px;
+    font-family:'DM Sans',sans-serif;
+    font-size:.92rem;
+    font-weight:600;
+    cursor:pointer;
+    white-space:nowrap;
+    transition:transform .2s,box-shadow .2s;
+    box-shadow:0 4px 16px rgba(232,99,42,.3);
+  }
+  .btn-notify:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(232,99,42,.4);}
+
+  .form-note{
+    font-size:.78rem;
+    color:var(--muted);
+    opacity:0;
+    animation:fadeUp .7s ease forwards .65s;
+    margin-bottom:2.5rem;
+  }
+
+  .success-msg{
+    display:none;
+    background:var(--green-light);
+    color:var(--green-soft);
+    font-size:.9rem;
+    font-weight:600;
+    padding:.85rem 1.5rem;
+    border-radius:100px;
+    margin:0 auto 2.5rem;
+    max-width:420px;
+  }
+  .success-msg.show{display:block;}
+
+  .error-msg{
+    display:none;
+    background:#FDEBE5;
+    color:#C0421E;
+    font-size:.85rem;
+    font-weight:600;
+    padding:.7rem 1.5rem;
+    border-radius:100px;
+    margin:0 auto 1.5rem;
+    max-width:420px;
+  }
+  .error-msg.show{display:block;}
+
+  .btn-notify:disabled{
+    opacity:.7;
+    cursor:not-allowed;
+    transform:none;
+  }
+
+  /* ── Audience pills ── */
+  .audience-row{
+    display:flex;
+    justify-content:center;
+    gap:1rem;
+    flex-wrap:wrap;
+    opacity:0;
+    animation:fadeUp .7s ease forwards .75s;
+  }
+  .audience-pill{
+    display:inline-flex;
+    align-items:center;
+    gap:.5rem;
+    background:#fff;
+    border:1.5px solid rgba(122,69,40,.12);
+    color:var(--brown-mid);
+    font-size:.85rem;
+    font-weight:500;
+    padding:.55rem 1.2rem;
+    border-radius:100px;
+    text-decoration:none;
+    transition:transform .2s, box-shadow .2s, border-color .2s;
+  }
+  .audience-pill:hover{
+    transform:translateY(-2px);
+    box-shadow:0 6px 18px rgba(59,31,14,.08);
+    border-color:rgba(232,99,42,.3);
+  }
+  .audience-pill svg{flex-shrink:0;}
+
+  /* ── Footer ── */
+  footer{
+    background:var(--brown-dark);
+    padding:1.5rem 2.5rem;
+    text-align:center;
+    position:relative;
+    z-index:2;
+  }
+  footer p{font-size:.78rem;color:rgba(255,255,255,.4);}
+  footer a{color:rgba(255,255,255,.55);text-decoration:none;}
+  footer a:hover{color:var(--cream);}
+
+  @keyframes fadeUp{
+    from{opacity:0;transform:translateY(14px);}
+    to{opacity:1;transform:translateY(0);}
+  }
+
+  @media(max-width:480px){
+    .notify-form{flex-direction:column;}
+    .btn-notify{width:100%;}
+    nav{padding:1rem 1.5rem;}
+    main{padding:2.5rem 1.25rem;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="logo">Black Family <span>Health</span></a>
+</nav>
+
+<main>
+  <div class="content">
+    <div class="eyebrow">Launching Soon in Metro-Detroit</div>
+
+    <h1>Culturally competent care<br/><em>is on the way.</em></h1>
+
+    <p class="sub">Black Family Health is putting the finishing touches on our platform — connecting Detroit-area families with vetted, culturally competent healthcare providers. We're almost ready. Leave your email and we'll let you know the moment we're live.</p>
+
+    <form class="notify-form" id="notifyForm">
+      <input type="email" class="notify-input" id="emailInput" placeholder="you@email.com" required/>
+      <button type="submit" class="btn-notify">Notify Me</button>
+    </form>
+
+    <div class="success-msg" id="successMsg">✓ You're on the list — we'll be in touch soon!</div>
+    <div class="error-msg" id="errorMsg">Something went wrong — please try again in a moment.</div>
+
+    <p class="form-note">No spam. Just one email when we launch.</p>
+
+    <div class="audience-row">
+      <a href="mailto:providerservices@blkfamilyhealth.com?subject=I'm a Provider" class="audience-pill">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#3A6B4A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        I'm a healthcare provider
+      </a>
+      <a href="mailto:patientservices@blkfamilyhealth.com?subject=I'm Looking for Care" class="audience-pill">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#3A6B4A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        I'm looking for care
+      </a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <p>&copy; 2026 Black Family Health · Detroit, MI · <a href="mailto:hello@blackfamilyhealth.com">hello@blackfamilyhealth.com</a></p>
+</footer>
+
+<script>
+document.getElementById('notifyForm').addEventListener('submit', async function(e){
+  e.preventDefault();
+  const email = document.getElementById('emailInput').value;
+  const form = document.getElementById('notifyForm');
+  const submitBtn = form.querySelector('.btn-notify');
+  const errorMsg = document.getElementById('errorMsg');
+
+  errorMsg.classList.remove('show');
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Submitting…';
+
+  try {
+    const response = await fetch('/api/notify', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email }),
+    });
+
+    if (!response.ok) {
+      throw new Error('Request failed');
+    }
+
+    form.style.display = 'none';
+    document.querySelector('.form-note').style.display = 'none';
+    document.getElementById('successMsg').classList.add('show');
+  } catch (err) {
+    console.error('Signup error:', err);
+    errorMsg.classList.add('show');
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Notify Me';
+  }
+});
+</script>
+
+</body>
+</html>
