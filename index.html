@@ -314,7 +314,7 @@ document.getElementById('notifyForm').addEventListener('submit', async function(
   submitBtn.textContent = 'Submitting…';
 
   try {
-    const response = await fetch('/api/notify', {
+    const response = await fetch('https://bfh-notify-proxy.vercel.app/api/notify', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email }),
